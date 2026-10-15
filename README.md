@@ -197,13 +197,19 @@ They cover:
 ..\Order_Parser\.venv\Scripts\python.exe demos\tk_demo.py --screenshot demos\out\tk   # tk-light.png, tk-dark.png
 ..\Order_Parser\.venv\Scripts\python.exe -m streamlit run demos\streamlit_demo.py      # http://localhost:8501
 ..\Insight\Playback\.venv\Scripts\python.exe demos\nicegui_demo.py                     # http://127.0.0.1:8602
+..\matrix_hybrid\work_pc\.venv\Scripts\python.exe demos\matrix_states.py run demos\out\matrix-light-states
 ```
 
 In the desktop app, `.claude/launch.json` starts `streamlit-demo` (port 8601) and `nicegui-demo` (port 8602) in the browser pane. All demo numbers are made up.
 
+`matrix_states.py` re-takes the Matrix light-mode screenshots: every top-bar badge, cell state, position status, recorder state, dialog and Viewer link state, on demo data.
+- It opens real Studio and Viewer windows on the main monitor for about four minutes.
+- It uses throwaway settings, binds sharing to 127.0.0.1 and never reads the Schwab token.
+- It then writes labeled sheets (`sheets/`) and an `index.html` gallery next to the screenshots.
+
 ## Adopting it, project by project
 
-All three projects are adopted (Oct 14, 2026). None of them is committed yet. Every program opens light; each note below says how to get dark.
+All three projects are adopted (Oct 14, 2026) and committed as "added new design" (Oct 15). Only the Matrix's light-mode screenshot fixes below are still uncommitted. Every program opens light; each note below says how to get dark.
 
 - **Order_Parser** (done)
   - A pinned copy lives in `onedesk/` at the project root (see its `VENDORED.md`).
@@ -228,7 +234,14 @@ All three projects are adopted (Oct 14, 2026). None of them is committed yet. Ev
 - **matrix_hybrid** (done)
   - A pinned copy lives in `mini_pc/options_matrix/onedesk/` (see its `VENDORED.md`), inside the package so both PCs' editable installs find it without re-running setup.
   - The bridge `mini_pc/options_matrix/one_desk.py` holds every color name the Matrix uses, the fonts, `apply()` (the ttk theme) and the hatch. `app.py` imports from it, so later restyling never changes the math fingerprint.
-  - `app.py` changed once, so the fingerprint is now `d1d07bc092818b7a` (was `7e820aec33cc6660`). Copy the folder to both PCs together, or the Viewer says UPDATE NEEDED.
+  - `app.py` changed twice: for the restyle (`7e820aec33cc6660` → `d1d07bc092818b7a`), then for the light-mode screenshot fixes on Oct 15, 2026. The fingerprint is now `15ff2e6163fff7ae`. Copy the folder to both PCs together, or the Viewer says UPDATE NEEDED.
+  - Light-mode screenshot fixes (Oct 15, uncommitted):
+    - The sharing and Viewer link badges are wide enough for ⇄ SHARING ERROR and ◐ MINI PC: NO MARKET DATA.
+    - Disconnect on the Viewer now shows ○ OFFLINE and enables Connect again.
+    - ⚠ AUTH DUE is red on both PCs.
+    - Each entry of the Settings cell guide is as tall as its text.
+    - Close bid, mid and ask labels in the detail chart spread apart (`one_desk.spread_labels`).
+    - The Position… editor explains a bad average entry in plain words.
   - Buttons are sentence case, and fixed ALL-CAPS labels get the caps-label face.
   - Healthy cells keep the grid hairline. Failed streams are hatched (denser when the failure recurs) instead of outlined in red.
   - Both programs open light. `OPTIONS_MATRIX_THEME=dark` opens them dark, and `auto` follows Windows.
