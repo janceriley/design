@@ -14,18 +14,13 @@ from PIL import Image, ImageDraw, ImageFont
 
 OUT = Path(sys.argv[1])
 FONTS = Path(r"C:\Windows\Fonts")
-TEXT = ImageFont.truetype(str(FONTS / "seguisym.ttf"), 17)  # has the badge glyphs (◐ ↻ ⚠ ⇄ ✕)
+TEXT = ImageFont.truetype(str(FONTS / "seguisym.ttf"), 17)  # has the badge glyphs (◐ ↻ ⚠ ⮂ ✕)
 SECTION = ImageFont.truetype(str(FONTS / "segoeuib.ttf"), 19)
 TITLE = ImageFont.truetype(str(FONTS / "segoeuib.ttf"), 26)
 BG, INK, MUTED, RULE = (242, 244, 247), (23, 33, 47), (90, 101, 116), (206, 212, 221)
 PAD, GAP = 28, 18
 
-FINDINGS = [
-    "The ⇄ in the sharing badge reads like “=” at this size. It is One Desk's sharing glyph (tokens.json), "
-    "so a different glyph is a change to the Design package.",
-    "Detail chart: the price above a B or S dot on the FV lane is drawn across the ANOM lane's rule line, "
-    "so it reads like part of the ANOM row.",
-]
+FINDINGS: list[str] = []  # UI issues the screenshots still show; the gallery lists them first
 
 ORDER = [
     "Studio windows",
@@ -154,9 +149,9 @@ def gallery(items: list[dict[str, str]]) -> None:
         "</style></head><body><h1>Options Matrix Studio and Viewer, light mode</h1>",
         "<p>Demo data. Every screenshot is a real window of the current code; a few states were set "
         "the way the app sets them (see each caption).</p>",
-        "<h2>Issues spotted</h2><ul>",
-        *(f"<li>{html.escape(finding)}</li>" for finding in FINDINGS),
-        "</ul>",
+        "<h2>Issues spotted</h2>",
+        *(["<ul>", *(f"<li>{html.escape(finding)}</li>" for finding in FINDINGS), "</ul>"]
+          if FINDINGS else ["<p>None open.</p>"]),
     ]
     for name in ORDER + sorted(set(groups) - set(ORDER)):
         if name not in groups:

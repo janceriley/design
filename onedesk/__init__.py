@@ -1,4 +1,4 @@
-"""One Desk: the shared look for Options Matrix Studio and Viewer, Playback and Order Parser.
+"""One Desk: the shared look for Options Matrix Studio and Viewer, Playback, Order Parser and Equity Recorder.
 
 Core modules have no third-party dependencies:
 
@@ -14,6 +14,7 @@ Toolkit adapters import their toolkit lazily:
 * :mod:`onedesk.tk_theme`        - Tkinter (Studio and Viewer)
 * :mod:`onedesk.streamlit_theme` - Streamlit (Order Parser)
 * :mod:`onedesk.nicegui_theme`   - NiceGUI (Playback)
+* :mod:`onedesk.qt_theme`        - Qt / PySide6 (Equity Recorder)
 """
 
 from __future__ import annotations

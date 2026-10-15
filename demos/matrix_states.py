@@ -696,15 +696,17 @@ def studio_role(out: Path, control: Path) -> None:
             bar_shot(f"indicators/studio-auth-{days}d.png", caption, G_AUTH)
         token["issued"] = datetime.now(timezone.utc) - timedelta(days=1)
         OptionsMatrixApp._set_connected_state(studio, True)
+        share = one_desk.SHARING_GLYPH
         studio._update_studio_settings(share_enabled=False)
         pump(0.8)
-        bar_shot("indicators/studio-share-off.png", "⇄ SHARING OFF", G_SHARE)
+        bar_shot("indicators/studio-share-off.png", f"{share} SHARING OFF", G_SHARE)
         studio._update_studio_settings(share_enabled=True)
         pump(1.5)
-        bar_shot("indicators/studio-share-0.png", "⇄ 0 VIEWERS: sharing, nobody connected", G_SHARE)
+        bar_shot("indicators/studio-share-0.png", f"{share} 0 VIEWERS: sharing, nobody connected", G_SHARE)
         for text, name, caption in (
-            ("⇄ SHARING ERROR", "error", "⇄ SHARING ERROR: sharing could not start (for example, the port is taken)"),
-            ("⇄ 2 VIEWERS", "2", "⇄ 2 VIEWERS"),
+            (f"{share} SHARING ERROR", "error",
+             f"{share} SHARING ERROR: sharing could not start (for example, the port is taken)"),
+            (f"{share} 2 VIEWERS", "2", f"{share} 2 VIEWERS"),
         ):
             studio.share_indicator_var.set(text)
             pump(0.2)
@@ -971,8 +973,8 @@ def viewer_role(out: Path, control: Path) -> None:
     shot("viewer/03-live.png", "Live from the mini PC: ● LIVE, the mini PC's health line, the same tabs and signals")
     bar_shot("indicators/viewer-link-live.png", "● LIVE", G_LINK)
     send({"cmd": "shot", "rel": "studio/12-sharing-one-viewer.png",
-          "caption": "Mini PC with the work PC connected: ⇄ 1 VIEWER",
-          "bar": "indicators/studio-share-1.png", "bar_caption": "⇄ 1 VIEWER (a real connection)"})
+          "caption": f"Mini PC with the work PC connected: {one_desk.SHARING_GLYPH} 1 VIEWER",
+          "bar": "indicators/studio-share-1.png", "bar_caption": f"{one_desk.SHARING_GLYPH} 1 VIEWER (a real connection)"})
     send({"cmd": "mini_pc_dialog"})
 
     # 3. Narrowed view, the View pop-up, read-only settings ---------------------------------------

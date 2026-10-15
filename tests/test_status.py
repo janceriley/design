@@ -11,7 +11,7 @@ class StatusTests(unittest.TestCase):
         self.assertEqual(status.needs("Auth", "2d").text(), "⚠ AUTH · 2d")
         self.assertEqual(status.reconnecting().text(), "↻ RECONNECTING")
         self.assertEqual(status.error("Rec error").text(), "! REC ERROR")
-        self.assertEqual(status.sharing(1).text(), "⇄ 1 VIEWER")
+        self.assertEqual(status.sharing(1).text(), "⮂ 1 VIEWER")
         self.assertEqual(status.sharing(0).kind, Kind.OFF)
         self.assertEqual(status.demo().text(), "DEMO DATA")
 
