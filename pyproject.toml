@@ -1,0 +1,26 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "onedesk"
+version = "0.1.0"
+description = "One Desk: shared design tokens and Tk, Streamlit and NiceGUI adapters for Options Matrix, Playback and Order Parser."
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = []
+
+[project.optional-dependencies]
+streamlit = ["streamlit>=1.60", "plotly>=5.18"]
+nicegui = ["nicegui>=3.9,<4"]
+plotly = ["plotly>=5.18"]
+dev = ["pytest>=8"]
+
+[tool.setuptools.packages.find]
+include = ["onedesk*"]
+
+[tool.setuptools.package-data]
+onedesk = ["tokens.json"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

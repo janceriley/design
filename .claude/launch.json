@@ -1,0 +1,17 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "streamlit-demo",
+      "runtimeExecutable": "C:\\Users\\Jance\\Documents\\Dev\\Order_Parser\\.venv\\Scripts\\python.exe",
+      "runtimeArgs": ["-B", "-m", "streamlit", "run", "demos/streamlit_demo.py", "--server.port", "8601", "--server.headless", "true"],
+      "port": 8601
+    },
+    {
+      "name": "nicegui-demo",
+      "runtimeExecutable": "C:\\Users\\Jance\\Documents\\Dev\\Insight\\Playback\\.venv\\Scripts\\python.exe",
+      "runtimeArgs": ["-B", "demos/nicegui_demo.py"],
+      "port": 8602
+    }
+  ]
+}
